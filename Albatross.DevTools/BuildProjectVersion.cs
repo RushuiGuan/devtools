@@ -21,6 +21,8 @@ namespace Albatross.DevTools {
 		[Option(Description = "Use Directory.Build.props file instead of .version file")]
 		public bool DirectoryBuildProps { get; set; }
 
+		[Option("label", Description = "The label of the prerelease version, e.g. 'alpha', 'beta', 'rc'.  If not set, branch name would be used")]
+		public string? PrereleaseLabel { get; set; }
 	}
 	public class BuildProjectVersion : BaseHandler<BuildProjectVersionOptions> {
 		private readonly CsprojFileService csprojFileService;
@@ -60,8 +62,12 @@ namespace Albatross.DevTools {
 			var gitDirectory = Repository.Discover(options.Directory.FullName);
 			if (gitDirectory != null) {
 				using var repo = new Repository(gitDirectory);
-				var branch = repo.Head.FriendlyName;
-				var commitCount = repo.Commits.Count();
+				string[] prerelease;
+				if(string.IsNullOrEmpty(this.options.PrereleaseLabel)) {
+					prerelease = new[] { repo.Commits.Count().ToString(), repo.Head.FriendlyName, };
+				} else {
+					prerelease = new[] { this.options.PrereleaseLabel };
+				}
 				var hash = repo.Head.Tip.Sha.Substring(0, 7);
 				SematicVersion semver;
 				if (options.Prod) {
@@ -72,10 +78,7 @@ namespace Albatross.DevTools {
 					};
 				} else {
 					semver = new SematicVersion(versionText) {
-						PreRelease = [
-							$"{commitCount}",
-							branch,
-						],
+						PreRelease = prerelease,
 						Metadata = [
 							hash
 						]
