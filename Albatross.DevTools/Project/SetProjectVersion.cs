@@ -7,8 +7,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Albatross.DevTools.Csproj  {
-	[Verb("csproj set-version", typeof(SetProjectVersion), Description = "Set the version of a Directory.Build.props file")]
+namespace Albatross.DevTools.Project  {
+	[Verb("project set-version", typeof(SetProjectVersion), Description = "Set the version of a Directory.Build.props file")]
 	public record class SetProjectVersionOptions {
 		[Option("d")]
 		public DirectoryInfo Directory { get; set; } = null!;

@@ -1,6 +1,6 @@
 ﻿using Albatross.CommandLine;
 using Albatross.Config;
-using Albatross.DevTools.Csproj;
+using Albatross.DevTools.Project;
 using AzureDevOpsProxy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,13 +1,12 @@
 ﻿using Albatross.CommandLine;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.CommandLine.Invocation;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Albatross.DevTools {
-	[Verb("project-list", typeof(GetProjectList))]
+namespace Albatross.DevTools.Project {
+	[Verb("project list", typeof(GetProjectList), Description = "Return projects with the specific header from a .projects file")]
 	public class GetProjectListOptions {
 		[Option("f")]
 		public FileInfo File { get; set; } = null!;

@@ -9,8 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Albatross.DevTools.Csproj  {
-	[Verb("csproj version", typeof(BuildProjectVersion), Description = "Create a prerelease version with the format of [version]-[commit_count].[branch]+[hash] or a release version with the format of [version]+[hash]")]
+namespace Albatross.DevTools.Project  {
+	[Verb("project version", typeof(BuildProjectVersion), Description = "Create a prerelease version with the format of [version]-[commit_count].[branch]+[hash] or a release version with the format of [version]+[hash]")]
 	public record class BuildProjectVersionOptions {
 		[Option("d", Description = "Specify the directory of the version file")]
 		public DirectoryInfo Directory { get; set; } = null!;

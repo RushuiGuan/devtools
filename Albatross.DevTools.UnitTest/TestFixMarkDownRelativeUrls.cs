@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Albatross.DevTools.Project;
+using Xunit;
 
 namespace Albatross.DevTools.UnitTest {
 	public class TestFixMarkDownRelativeUrls {

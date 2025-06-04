@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System;
 
-namespace Albatross.DevTools.Csproj {
+namespace Albatross.DevTools.Project {
 	public class CsprojFileService {
 		public string? ReadProperty(FileInfo file, string property) {
 			var doc = new System.Xml.XmlDocument();

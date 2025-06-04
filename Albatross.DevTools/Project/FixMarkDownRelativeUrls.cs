@@ -7,8 +7,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Albatross.DevTools {
-	[Verb("fix-markdown-relative-urls", typeof(FixMarkDownRelativeUrls), Description = Description)]
+namespace Albatross.DevTools.Project {
+	[Verb("project fix-markdown-relative-urls", typeof(FixMarkDownRelativeUrls), Description = Description)]
 	public record class FixMarkDownRelativeUrlsOptions {
 		const string Description = "Replace the relative urls in a markdown file with absolute urls using the provided RootUrl and RootFolder.  The new url will be the constructed with the format of: {RootUrl}/{PathRelativeToRootFolder}.  The utility is useful to fix the relative urls in the README.md file since the file is packed as part of the nuget package and its relative urls will not work in the nuget.org website";
 		public FileInfo MarkdownFile { get; set; } = null!;

@@ -4,8 +4,8 @@ using System.CommandLine.Invocation;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Albatross.DevTools.Csproj  {
-	[Verb("csproj property", typeof(ReadProjectProperty), Description = "Reads a property from a .csproj file.")]
+namespace Albatross.DevTools.Project  {
+	[Verb("project property", typeof(ReadProjectProperty), Description = "Reads a property from a cshar project file.")]
 	public class ReadProjectPropertyOptions {
 		[Option("f")]
 		public FileInfo ProjectFile { get; set; } = null!;
