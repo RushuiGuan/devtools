@@ -7,24 +7,27 @@ using System.IO;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools {
-	[Verb("is-dirty", typeof(HasUncomittedChanges), Description = "Check if the directory has uncomitted changes")]
+	[Verb("git is-dirty", typeof(HasUncomittedChanges), Description = "Check if the directory has uncomitted changes.  Return 1 if it has, 0 if it does not.")]
 	public class HasUncomittedChangesOptions {
 		[Option("d")]
 		public DirectoryInfo Directory { get; set; } = null!;
-		[Option("s")]
+
+		[Option("s", Description = "If set, show the uncommitted changes in the output")]
 		public bool Show { get; set; }
 	}
+
 	public class HasUncomittedChanges : BaseHandler<HasUncomittedChangesOptions> {
 		private readonly ILogger<HasUncomittedChanges> logger;
 
 		public HasUncomittedChanges(IOptions<HasUncomittedChangesOptions> options, ILogger<HasUncomittedChanges> logger) : base(options) {
 			this.logger = logger;
 		}
+
 		public override Task<int> InvokeAsync(InvocationContext context) {
 			var gitDirectory = Repository.Discover(options.Directory.FullName);
 			if (gitDirectory != null) {
 				var rootDirectory = new DirectoryInfo(gitDirectory).Parent
-					?? throw new System.Exception("Parent directory of Git Directory is not found");
+				                    ?? throw new System.Exception("Parent directory of Git Directory is not found");
 				using var repo = new Repository(gitDirectory);
 				var relativePath = Path.GetRelativePath(rootDirectory.FullName, options.Directory.FullName);
 				var status = repo.RetrieveStatus();
@@ -37,6 +40,7 @@ namespace Albatross.DevTools {
 						}
 					}
 				}
+
 				if (isDirty) {
 					return Task.FromResult(1);
 				} else {

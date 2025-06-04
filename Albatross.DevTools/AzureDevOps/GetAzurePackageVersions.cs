@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools.AzureDevOps {
-	[Verb("azure-package-versions", typeof(GetAzurePackageVersions))]
+	[Verb("azure-devops package-versions", typeof(GetAzurePackageVersions), Description = "Show the versions of a package")]
 	public record GetAzurePackageVersionsOptions {
 		public string? Project { get; set; }
 		[Option("n")]

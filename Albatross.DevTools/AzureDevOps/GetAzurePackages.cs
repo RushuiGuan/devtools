@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools.AzureDevOps {
-	[Verb("azure-packages", typeof(GetAzurePackages))]
+	[Verb("azure-devops packages", typeof(GetAzurePackages), Description = "List packages in the specified Azure DevOps feed.")]
 	public record GetAzurePackagesOptions {
 		[Option("p")]
 		public string? Project { get; set; }

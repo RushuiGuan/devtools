@@ -6,8 +6,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Albatross.DevTools {
-	[Verb("remove-project-version", typeof(RemoveProjectVersion))]
+namespace Albatross.DevTools.Csproj  {
+	[Verb("csproj remove-version", typeof(RemoveProjectVersion), Description = "Removes the version property from all .csproj files in the specified directory.")]
 	public record class RemoveProjectVersionOptions {
 		[Option("d")]
 		public DirectoryInfo Directory { get; set; } = null!;

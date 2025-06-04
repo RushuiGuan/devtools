@@ -25,7 +25,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Albatross.CommandLine" Version="7.8.3" />
+		<PackageReference Include="Albatross.CommandLine" Version="7.8.7" />
 		<PackageReference Include="LibGit2Sharp" Version="0.30.0" />
 	</ItemGroup>
 	<ItemGroup>

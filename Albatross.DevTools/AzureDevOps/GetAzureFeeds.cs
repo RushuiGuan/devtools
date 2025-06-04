@@ -7,7 +7,7 @@ using System.CommandLine.Invocation;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools.AzureDevOps {
-	[Verb("azure-feeds", typeof(GetAzureFeeds))]
+	[Verb("azure-devops feeds", typeof(GetAzureFeeds), Description = "Show the Azure DevOps feeds in the specified project or for the whole organization.")]
 	public record GetAzureFeedsOptions {
 		public string? Project { get; set; }
 	}

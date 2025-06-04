@@ -7,22 +7,25 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Albatross.DevTools {
-	[Verb("format-xml", typeof(FormatXml), Description = "Format the xml file")]
+namespace Albatross.DevTools.Xml {
+	[Verb("xml format", typeof(FormatXml), Description = "Format the xml file")]
 	public class FormatXmlOptions {
 		[Option("f")]
 		public FileInfo XmlFile { get; set; } = null!;
-	
+
 		[Option("i", Required = false, Description = "If 0, tab is used for indent.  Otherwise the specified number of spaces are used instead")]
 		public int SpaceIndentSize { get; set; }
 	}
+
 	public class FormatXml : BaseHandler<FormatXmlOptions> {
 		public FormatXml(IOptions<FormatXmlOptions> options) : base(options) {
 		}
+
 		public override Task<int> InvokeAsync(InvocationContext context) {
 			if (!this.options.XmlFile.Exists) {
 				throw new InvalidOperationException($"File {this.options.XmlFile.FullName} does not exist");
 			}
+
 			var doc = new System.Xml.XmlDocument();
 			doc.Load(this.options.XmlFile.FullName);
 			XmlWriterSettings settings = new XmlWriterSettings();
@@ -32,11 +35,13 @@ namespace Albatross.DevTools {
 			} else {
 				settings.IndentChars = new string(' ', this.options.SpaceIndentSize);
 			}
-			using(var writer = new StreamWriter(options.XmlFile.FullName)) {
+
+			using (var writer = new StreamWriter(options.XmlFile.FullName)) {
 				using (XmlWriter xml = XmlWriter.Create(writer, settings)) {
 					doc.Save(xml);
 				}
 			}
+
 			return Task.FromResult(0);
 		}
 	}
