@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools.Project  {
-	[Verb("project version", typeof(BuildProjectVersion), Description = "Create a prerelease version with the format of [version]-[commit_count].[branch]+[hash] or a release version with the format of [version]+[hash]")]
+	[Verb("project version", typeof(BuildProjectVersion), Description = "Create a new version based on the current version and the input parameters.  The current version file will not be modified.  The resulting version will always use a 7 digit git hash as the version metadata.")]
 	public record class BuildProjectVersionOptions {
 		[Option("d", Description = "Specify the directory of the version file")]
 		public DirectoryInfo Directory { get; set; } = null!;
@@ -21,7 +21,7 @@ namespace Albatross.DevTools.Project  {
 		[Option(Description = "Use Directory.Build.props file instead of .version file")]
 		public bool DirectoryBuildProps { get; set; }
 
-		[Option("label", Description = "The label of the prerelease version, e.g. 'alpha', 'beta', 'rc'.  If not set, branch name would be used")]
+		[Option("label", Description = "The label of the prerelease version, e.g. 'alpha', 'beta', 'rc'.  If not specified, format [commit_count].[branch] would be used.")]
 		public string? PrereleaseLabel { get; set; }
 	}
 	public class BuildProjectVersion : BaseHandler<BuildProjectVersionOptions> {

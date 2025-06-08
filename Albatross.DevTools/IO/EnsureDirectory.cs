@@ -5,12 +5,12 @@ using System.CommandLine.Invocation;
 using System.IO;
 
 namespace Albatross.DevTools.IO {
-	[Verb("io ensure-directory", typeof(EnsureDirectory), Alias = ["ensure"], Description = "Ensures that a directory exists, creating it if necessary.")]
+	[Verb("io ensure-directory", typeof(EnsureDirectory), Alias = ["ensure"], Description = "Ensures that a directory exists if not create it.  Returns the intended directory.")]
 	public class EnsureDirectoryOptions {
 		[Argument(ArityMin = 1)]
 		public string[] Segments { get; set; } = [];
 
-		[Option("--file", "f", Description = "If true, the last segment is treated as a file, and the directory is created for that file.")]
+		[Option("--file", "f", Description = "If true, the last segment is treated as a file, and the directory of the file would be created.")]
 		public bool IsFile { get; set; }
 	}
 

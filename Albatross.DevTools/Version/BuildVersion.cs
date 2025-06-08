@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Albatross.DevTools.Version {
-	[Verb("version build", typeof(BuildVersion), Alias = ["b"], Description = "Bump the version number")]
+	[Verb("version build", typeof(BuildVersion), Alias = ["b"], Description = "Build a semantic version based on the provided options.")]
 	public class BuildVersionOptions {
 		[Option("ver")]
 		public string Version { get; set; } = string.Empty;
